@@ -1,0 +1,20 @@
+### Create Feed 
+POST http://localhost:3000/api/feeds
+content-type: application/json
+
+{
+  "body":"Hoang",
+  "name": "asdhfoasdf"
+}
+
+### Get Feed By Id
+GET http://localhost:3000/api/feeds/5
+
+### Get All Feed
+GET http://localhost:3000/api/feeds/all
+
+
+### GET ALL FEED BY CURRENT USER
+GET http://localhost:3000/api/feeds
+
+

@@ -1,0 +1,30 @@
+
+### update infor by current user
+PATCH http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "hoang280202",
+  "id": 1
+}
+
+################################################ADMIN
+### Get All User
+  GET http://localhost:3000/api/users
+
+### Get User By Id
+GET http://localhost:3000/api/users/2
+
+### Delete User By Id
+DELETE http://localhost:3000/api/users/6
+
+### Update user by admin
+
+PATCH http://localhost:3000/api/users/5
+content-type: application/json
+
+{
+  "name": "hoang280202",
+  "id": 1
+}
+
