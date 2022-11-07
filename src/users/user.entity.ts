@@ -20,6 +20,6 @@ export class User {
   @Column({ default: false })
   role: boolean;
 
-  @OneToMany((type) => Feed, (feed) => feed.user)
-  feeds: Feed[];
+  @Column({ default: null })
+  refresh_token: string;
 }

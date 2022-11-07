@@ -1,5 +1,4 @@
 import { Expose, Transform } from 'class-transformer';
-import { User } from 'src/users/user.entity';
 export class FeedDto {
   @Expose()
   id: number;
@@ -10,7 +9,7 @@ export class FeedDto {
   @Expose()
   createAt: Date;
 
-  @Transform(({ obj }) => obj.user.id)
-  @Expose()
-  userId: number;
+  // @Transform(({ obj }) => obj.user.id)
+  // @Expose()
+  // userId: number;
 }

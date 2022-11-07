@@ -6,6 +6,9 @@ import { APP_PIPE, MiddlewareBuilder } from '@nestjs/core';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { CurrentUserMiddleware } from './middlewares/current-user.middleware';
+import { JwtStategy } from './auth/jwt.strategy';
+import { JwtRefreshStategy } from './auth/jwt_refresh.strategy';
+import { CategoriesModule } from './categories/categories.module';
 const cookieSession = require('cookie-session');
 @Module({
   imports: [
@@ -23,6 +26,7 @@ const cookieSession = require('cookie-session');
     FeedModule,
     UsersModule,
     AuthModule,
+    CategoriesModule,
   ],
   providers: [
     {
@@ -31,18 +35,10 @@ const cookieSession = require('cookie-session');
         whitelist: true,
       }),
     },
+    JwtStategy,
+    JwtRefreshStategy,
   ],
 })
 export class AppModule {
   constructor(private configService: ConfigService) {}
-  configure(consumer: MiddlewareBuilder) {
-    consumer
-      .apply(
-        cookieSession({
-          keys: ['ajsdlfhdlhfla'],
-        }),
-        CurrentUserMiddleware,
-      )
-      .forRoutes('*');
-  }
 }

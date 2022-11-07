@@ -13,4 +13,7 @@ export class UserDto {
 
   @Expose()
   role: boolean;
+
+  @Expose()
+  access_token: string;
 }

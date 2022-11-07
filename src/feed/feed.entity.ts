@@ -1,4 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+  ManyToMany,
+  JoinTable,
+  OneToMany,
+} from 'typeorm';
 import { User } from 'src/users/user.entity';
 @Entity()
 export class Feed {
@@ -11,6 +20,7 @@ export class Feed {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createAt: Date;
 
-  @ManyToOne((type) => User, (user) => user.feeds)
-  user: User;
+  @ManyToOne((type) => User, (user) => user.id)
+  @JoinColumn({ name: 'userId' })
+  userId: number;
 }

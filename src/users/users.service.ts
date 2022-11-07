@@ -8,11 +8,14 @@ import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
+import { JwtService } from '@nestjs/jwt';
+import { jwtConstants } from 'src/auth/constant';
 const bcrypt = require('bcrypt');
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private readonly userRepo: Repository<User>,
+    private jwtService: JwtService,
   ) {}
   async createOne(body: CreateUserDto) {
     const user = await this.userRepo.find({ where: { email: body.email } });
@@ -50,8 +53,8 @@ export class UsersService {
     return await this.userRepo.save(user);
   }
 
-  async updateUser(email: string, body: UpdateUserDto) {
-    const user = await this.findOne(email);
+  async updateUser(id: number, body: UpdateUserDto) {
+    const user = await this.findId(id);
     if (!user) {
       throw new NotFoundException('use not found');
     }
@@ -60,7 +63,9 @@ export class UsersService {
   }
 
   async findOne(email: string) {
-    const user = await this.userRepo.findOne({ where: { email } });
+    const user = await this.userRepo.findOne({
+      where: { email },
+    });
     return user;
   }
 
